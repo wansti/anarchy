@@ -194,7 +194,7 @@
   "install.package": {"icon":"󰣇","label":"Package","action":"xdg-terminal-exec --app-id=org.omarchy.terminal omarchy-pkg-install"},
   "install.aur": {"icon":"󰣇","label":"AUR","action":"xdg-terminal-exec --app-id=org.omarchy.terminal omarchy-pkg-aur-install"},
 //  "install.ai": {"icon":"󱚤","label":"AI"},
-  "install.service": {"icon":"","label":"Service"},
+//  "install.service": {"icon":"","label":"Service"},
   "install.development": {"icon":"󰵮","label":"Development"},
   "install.editor": {"icon":"","label":"Editor"},
   "install.style": {"icon":"","label":"Style"},
@@ -285,7 +285,7 @@
   // Remove
   "remove.package": {"icon":"󰣇","label":"Package","action":"xdg-terminal-exec --app-id=org.omarchy.terminal omarchy-pkg-remove"},
  // "remove.ai": {"icon":"󱚤","label":"AI","title":"Remove"},
-  "remove.service": {"icon":"","label":"Services","title":"Remove"},
+//  "remove.service": {"icon":"","label":"Services","title":"Remove"},
   "remove.development": {"icon":"󰵮","label":"Development","title":"Remove"},
   "remove.theme": {"icon":"󰸌","label":"Theme","action":"omarchy-theme-remove"},
   "remove.gaming": {"icon":"","label":"Gaming","title":"Remove"},
