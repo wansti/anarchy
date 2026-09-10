@@ -16,6 +16,9 @@ Goals:
 * Minimize reliance on AUR packages, remove custom repositories completely
 * Make dotfiles usable on other Arch based distros like CachyOS
 
+Changes:
+* Services and AI menus removed (applications can still be installed from the AUR)
+
 ## Setup
 
 ### Prerequisites
