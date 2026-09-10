@@ -16,3 +16,6 @@ cp default/bashrc ~/.bashrc
 
 # setup screen lock (writes to /etc/pam.d)
 bin/omarchy-apply-lock
+
+# Turn off screensaver (relies on a custom package)
+bin/omarchy toggle screensaver
