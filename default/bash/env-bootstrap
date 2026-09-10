@@ -11,7 +11,7 @@ if [ -f /etc/omarchy.conf ]; then
   . /etc/omarchy.conf
   : "${OMARCHY_PATH:=/usr/share/omarchy}"
 else
-  OMARCHY_PATH=/usr/share/omarchy
+  OMARCHY_PATH=~/anarchy
 fi
 export OMARCHY_PATH
 
