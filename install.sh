@@ -1,5 +1,6 @@
+cd
 sudo pacman -Sy base-devel git
-git clone git@github.com:wansti/anarchy.git
+git clone git@github.com:wansti/anarchy.git .anarchy
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
@@ -19,3 +20,6 @@ bin/omarchy-apply-lock
 
 # Turn off screensaver (relies on a custom package)
 bin/omarchy toggle screensaver
+
+# For Steam/Gaming:
+# edit /etc/pacman.conf and uncomment the [multilib] section
