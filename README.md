@@ -1,9 +1,15 @@
 # Anarchy
 
 Dotfiles from Omarchy Quattro for user installation on Arch Linux.
-Debloated, with minimal changes to the operating system.
 
 Work in progress.
+
+Goals:
+* Use basic dotfiles from Omarchy
+* Do not install any of the bloat by default
+* Make Omarchy themes and plugins usable
+* User installation only, minimize changes to the operating system
+* Minimize reliance on AUR packages, remove custom repositories completely
 
 ## Setup
 
