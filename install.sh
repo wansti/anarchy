@@ -17,6 +17,11 @@ cp default/bashrc ~/.bashrc
 mkdir -p ~/.config/systemd
 cp -r default/systemd/user ~/.config/systemd/
 
+mkdir -p ~/.local/share/applications
+cp applications/foot.desktop ~/.local/share/applications/
+cp applications/mpv.desktop ~/.local/share/applications/
+cp default/xdg-terminal-exec/hyprland-xdg-terminals.list ~/.config/
+
 # setup screen lock (writes to /etc/pam.d)
 bin/omarchy-apply-lock
 
