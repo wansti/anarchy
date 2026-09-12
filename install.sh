@@ -11,7 +11,7 @@ sudo pacman -Sy --needed alacritty alsa-utils avahi bash-completion bat bluez bl
 #yay -Sy localsend xdg-terminal-exec tzupdate yaru-icon-theme
 yay -Sy xdg-terminal-exec
 
-cd anarchy
+cd .anarchy
 cp -r config/* ~/.config/
 cp default/bashrc ~/.bashrc
 mkdir -p ~/.config/systemd
