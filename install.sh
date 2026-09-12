@@ -14,12 +14,16 @@ yay -Sy xdg-terminal-exec
 cd anarchy
 cp -r config/* ~/.config/
 cp default/bashrc ~/.bashrc
+mkdir -p ~/.config/systemd
+cp -r default/systemd/user ~/.config/systemd/
 
 # setup screen lock (writes to /etc/pam.d)
 bin/omarchy-apply-lock
 
+#Reboot
+
 # Turn off screensaver (relies on a custom package)
-bin/omarchy toggle screensaver
+~/.anarchy/bin/omarchy toggle screensaver
 
 # For Steam/Gaming:
 # edit /etc/pacman.conf and uncomment the [multilib] section
