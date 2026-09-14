@@ -4,11 +4,17 @@ Dotfiles from Omarchy Quattro for user installation on Arch Linux.
 
 WORK IN PROGRESS.
 
-Motivation:
-* I like the Omarchy dotfiles as a solid basic Hyprland/Quickshell setup. I like the themes and plugins. I like the mixed focus on development and gaming. I like most of the default keybinds. Some of the included scripts are useful to me.
+### Motivation
+* I like the Omarchy dotfiles as a solid[^1] basic Hyprland/Quickshell setup. I like the themes and plugins. I like the mixed focus on development and gaming. I like most of the default keybinds. Some of the included scripts are useful to me.
 * I don't want another distro, especially one with severely limited options. I don't want any "opinions" in my root file system. I don't want random preinstalled commercial bloatware (if I did I'd use Windows). The practice of slapping some bash scripts and config files onto Arch Linux, calling it a "distro" and collecting a bunch of money seems shady at best.
 
-Goals:
+[^1]: in terms of looks, not code base.
+
+### Disclaimer
+
+Major security concerns have been raised about Omarchy (e.g. [here](https://community.frame.work/t/omarchy-is-not-a-secure-distribution-and-should-be-taken-off-the-linux-installation-options/77363). Part of this effort is to reduce risk by limiting root file system access/changes to an absolute minimum, reviewing the code, and ditching unneccessary stuff. I strongly advise against using vanilla Omarchy, especially if you are new to Linux. Plugins can contain bugs or malicious code so always take care when installing them. This project is a work in progress and may contain bugs or missing the latest security patches. Use at your own risk.
+
+### Goals
 * Use basic dotfiles from Omarchy
 * Make Omarchy themes and plugins usable
 * User installation only, minimize changes to the operating system
@@ -16,7 +22,7 @@ Goals:
 * Minimize reliance on AUR packages, remove custom repositories completely
 * Make dotfiles usable on other Arch based distros like CachyOS
 
-Changes:
+### Changes
 * Services and AI menus removed (applications can still be installed from the AUR)
 
 ## Setup
