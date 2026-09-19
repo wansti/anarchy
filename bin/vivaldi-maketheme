@@ -1,0 +1,135 @@
+#!/bin/bash
+THEMEDIR=$HOME/.local/state/omarchy/current
+COLORFILE=$THEMEDIR/theme/colors.toml
+NAMEFILE=$THEMEDIR/theme.name
+BGIMG=$(readlink -f $THEMEDIR/background)
+
+if [ ! -f $COLORFILE ]; then
+  echo "Cannot find colors.toml"
+  exit 1
+fi
+if [ ! -f $NAMEFILE ]; then
+  echo "Cannot find theme.name"
+  exit 1
+fi
+if [ ! -f $BGIMG ]; then
+  echo "Cannot find background image"
+  exit 1
+fi
+
+COLORS=""
+
+# AI generated
+show_colors() {
+    echo "Parsing $COLORFILE..."
+    local block="  "
+    local reset="\e[0m"
+
+    newline=0
+
+    while IFS= read -r line; do
+        # Skip empty lines and comments
+        [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+        # Extract key and hex value
+        local key hex
+        key=$(echo "$line" | cut -d'=' -f1 | xargs)
+        hex=$(echo "$line" | cut -d'=' -f2 | tr -d ' "')
+
+        COLORS="$COLORS $key"
+
+        # Skip if not a valid hex color
+        [[ "$hex" =~ ^#[0-9a-fA-F]{6}$ ]] || continue
+
+        # Convert hex to RGB
+        local r g b
+        r=$((16#${hex:1:2}))
+        g=$((16#${hex:3:2}))
+        b=$((16#${hex:5:2}))
+
+        # Print color name and swatch
+        printf "%-10s " "$key"
+        printf "\e[48;2;%d;%d;%dm%s\e[0m" "$r" "$g" "$b" "$block"
+        if [[ $newline -eq 2 ]]; then
+          printf "\n"
+          newline=0
+        else
+          newline=$((newline+1))
+          printf "    "
+        fi
+        #printf "  #%s\n" "${hex:1}"
+    done < "$COLORFILE"
+    printf "\n\n"
+}
+
+contains() {
+  local value="$1"
+  for color in $COLORS; do
+    if [[ "$value" == "$color" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+show_colors
+
+if contains "$1" && contains "$2"; then
+  echo "Using colors $1 and $2"
+else
+  echo "Usage: $0 foreground_color accent_color"
+  echo "Valid color names as listed above."
+  exit 1
+fi
+
+ACCENT=$(grep -E "^[[:space:]]*accent =" $COLORFILE | awk -F '"' '{print $2}')
+SELECTION=$(grep -E "^[[:space:]]*selection =" $COLORFILE | awk -F '"' '{print $2}')
+FOREGROUND=$(grep -E "^[[:space:]]*foreground =" $COLORFILE | awk -F '"' '{print $2}')
+BACKGROUND=$(grep -E "^[[:space:]]*background =" $COLORFILE | awk -F '"' '{print $2}')
+DARK_BACKGROUND=$(grep -E "^[[:space:]]*dark_background =" $COLORFILE | awk -F '"' '{print $2}')
+MUTED=$(grep -E "^[[:space:]]*muted =" $COLORFILE | awk -F '"' '{print $2}')
+COLOR1=$(grep -E "^[[:space:]]*$1\ =" $COLORFILE | awk -F '"' '{print $2}')
+COLOR2=$(grep -E "^[[:space:]]*$2 =" $COLORFILE | awk -F '"' '{print $2}')
+
+NAME=$(cat $NAMEFILE)
+VIVALDI_THEME_NAME=vivaldi_theme_$NAME.zip
+
+#echo $ACCENT $SELECTION $BACKGROUND $FOREGROUND $COLOR1 $COLOR2 $NAME $BGIMG
+
+TMPDIR=$(mktemp -d)
+
+cp $BGIMG $TMPDIR
+pushd $TMPDIR
+
+echo "{
+\"accentFromPage\": false,
+\"accentOnWindow\": false,
+\"accentSaturationLimit\": 1,
+\"alpha\": 0.75,
+\"backgroundImage\": \"$(basename $BGIMG)\",
+\"backgroundPosition\": \"stretch\",
+\"blur\": 5,
+\"colorAccentBg\": \"$COLOR2\",
+\"colorBg\": \"$BACKGROUND\",
+\"colorFg\": \"$COLOR1\",
+\"colorHighlightBg\": \"$FOREGROUND\",
+\"colorWindowBg\": \"$DARK_BACKGROUND\",
+\"contrast\": 3,
+\"dimBlurred\": false,
+\"engineVersion\": 1,
+\"id\": \"$(uuidgen)\",
+\"name\": \"$NAME for Vivaldi\",
+\"preferSystemAccent\": false,
+\"radius\": 14,
+\"simpleScrollbar\": false,
+\"transparencyTabBar\": true,
+\"transparencyTabs\": false,
+\"url\": \"\",
+\"version\": 1
+}" > settings.json
+
+zip -r $VIVALDI_THEME_NAME `basename $BGIMG` settings.json
+popd
+
+mv $TMPDIR/$VIVALDI_THEME_NAME .
+rm -rf $TMPDIR
