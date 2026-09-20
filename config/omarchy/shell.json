@@ -22,9 +22,6 @@
           "id": "omarchy.indicators"
         },
         {
-          "id": "omacom.elsewhen"
-        },
-        {
           "id": "omarchy.clock",
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
