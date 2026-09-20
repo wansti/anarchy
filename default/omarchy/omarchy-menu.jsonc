@@ -33,7 +33,7 @@
   "system": {"icon":"","label":"System","aliases":["power-menu"]},
 
   // System
-  "system.screensaver": {"icon":"󱄄","label":"Screensaver","action":"omarchy-launch-screensaver force"},
+  //"system.screensaver": {"icon":"󱄄","label":"Screensaver","action":"omarchy-launch-screensaver force"},
   "system.lock": {"icon":"","label":"Lock","action":"omarchy-system-lock"},
   "system.suspend": {"icon":"󰒲","label":"Suspend","when":"! omarchy-toggle-enabled suspend-off","action":"systemctl suspend"},
   "system.hibernate": {"icon":"󰤁","label":"Hibernate","when":"omarchy-hibernation-available","action":"systemctl hibernate"},
@@ -90,7 +90,7 @@
   "trigger.toggle.idle-lock": {"icon":"󰅶","label":"Stay Awake","action":"omarchy-toggle-idle"},
   "trigger.toggle.notifications": {"icon":"󰂛","label":"Notifications","action":"omarchy-toggle-notification-silencing"},
   "trigger.toggle.crash-capture": {"icon":"󱚡","label":"Crash Capture","action":"omarchy-toggle-crash-capture"},
-  "trigger.toggle.screensaver": {"icon":"󱄄","label":"Screensaver","action":"omarchy-toggle-screensaver"},
+  //"trigger.toggle.screensaver": {"icon":"󱄄","label":"Screensaver","action":"omarchy-toggle-screensaver"},
   "trigger.toggle.nightlight": {"icon":"󰔎","label":"Nightlight","action":"omarchy-toggle-nightlight"},
   "trigger.toggle.top-bar": {"icon":"󰍜","label":"Menu Bar","action":"omarchy-toggle-bar"},
   "trigger.toggle.battery-percentage": {"icon":"󰁹","label":"Battery Percentage","when":"omarchy-hw-laptop","action":"omarchy-shell omarchy.power togglePercentage"},
@@ -109,7 +109,7 @@
   "style.bar.position": {"icon":"","label":"Position"},
   "style.bar.transparency": {"icon":"󰂵","label":"Transparency","action":"omarchy-bar transparent toggle"},
   "style.hyprland": {"icon":"","label":"Hyprland","action":"omarchy-launch-config-editor \"$HOME/.config/hypr/looknfeel.lua\""},
-  "style.screensaver": {"icon":"󱄄","label":"Screensaver"},
+  //"style.screensaver": {"icon":"󱄄","label":"Screensaver"},
   "style.about": {"icon":"","label":"About"},
   "style.bar.position.top": {"icon":"󰁝","label":"Top","action":"omarchy-bar position top"},
   "style.bar.position.bottom": {"icon":"󰁅","label":"Bottom","action":"omarchy-bar position bottom"},
