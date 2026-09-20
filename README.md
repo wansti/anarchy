@@ -72,16 +72,14 @@ git clone https://github.com/wansti/anarchy.git .anarchy
 
 6) Copy the initial configuration files:
 ```
+mkdir -p ~/.config/systemd ~/.local/share/applications ~/.local/state/omarchy/toggles
 cd .anarchy
 cp -r config/* ~/.config/
 cp default/bashrc ~/.bashrc
-mkdir -p ~/.config/systemd
 cp -r default/systemd/user ~/.config/systemd/
-
-mkdir -p ~/.local/share/applications
-cp applications/foot.desktop ~/.local/share/applications/
-cp applications/mpv.desktop ~/.local/share/applications/
+cp applications/foot.desktop applications/mpv.desktop ~/.local/share/applications/
 cp default/xdg-terminal-exec/hyprland-xdg-terminals.list ~/.config/
+touch ~/.local/state/omarchy/toggles/screensaver-off
 ```
 
 7) Optional: Run the script that sets up the screen lock:
@@ -91,8 +89,7 @@ bin/omarchy-apply-lock
 This will ask for root permissions in order to write the file `/etc/pam.d/omarchy-lock-password`.
 
 8) Reboot. Once the system is back, log into your Hyprland session. You should be greeted with the familiar interface.
-9) Disable the screensaver which relies on a nonexistent package. Either open a shell (`Super + Return`) and type `anarchy toggle screensaver`, or use the menu: `Super + Space`, then `Trigger -> Toggle -> Screensaver`.
-10) Optional: In order to install gaming-related packages (e.g. Steam, Battle.net), edit `/etc/pacman.conf` (as root) and uncomment the `[multilib]` section.
+9) Optional: In order to install gaming-related packages (e.g. Steam, Battle.net), edit `/etc/pacman.conf` (as root) and uncomment the `[multilib]` section.
 
 
 ### Automated Setup
