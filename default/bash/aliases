@@ -4,6 +4,8 @@ if command -v eza &> /dev/null; then
   alias lsa='ls -a'
   alias lt='eza --tree --level=2 --long --icons --git'
   alias lta='lt -a'
+  alias ll='ls'
+  alias la='lsa'
 fi
 
 if [[ "$TERM" == "xterm-kitty" ]]; then
@@ -62,3 +64,5 @@ alias g='git'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
 alias gcad='git commit -a --amend'
+
+alias anarchy='omarchy'

@@ -1,77 +1,106 @@
-# Omarchy
+# Anarchy
 
-Omarchy is a beautiful, fun & agentic Linux distribution by DHH.
+Dotfiles from Omarchy Quattro for user installation on Arch Linux.
 
-Read more at [omarchy.org](https://omarchy.org).
+WORK IN PROGRESS.
 
-## The Omarchy Manual
+### Motivation
+* I like the Omarchy dotfiles as a solid[^1] basic Hyprland/Quickshell setup. I like the themes and plugins. I like the mixed focus on development and gaming. I like most of the default keybinds. Some of the included scripts are useful to me.
+* I don't want another distro, especially one with severely limited options. I don't want any "opinions" in my root file system. I don't want random preinstalled commercial bloatware (if I did I'd use Windows). The practice of slapping some bash scripts and config files onto Arch Linux, calling it a "distro" and collecting a bunch of money seems shady at best.
 
-The manual lives in [`manual/`](manual/), which is its authoritative source.
+[^1]: in terms of looks, not code base.
 
-- [Welcome to Omarchy!](manual/01-welcome-to-omarchy.md)
+### Disclaimer
 
-**The Basics**
+Major security concerns have been raised about Omarchy (e.g. [here](https://community.frame.work/t/omarchy-is-not-a-secure-distribution-and-should-be-taken-off-the-linux-installation-options/77363). Part of this effort is to reduce risk by limiting root file system access/changes to an absolute minimum, reviewing the code, and ditching unneccessary stuff. I strongly advise against using vanilla Omarchy, especially if you are new to Linux. Plugins can contain bugs or malicious code so always take care when installing them. This project is a work in progress and may contain bugs or missing the latest security patches. Use at your own risk.
 
-- [Getting Started](manual/02-getting-started.md)
-- [Coming From Mac or Windows](manual/03-coming-from-mac-or-windows.md)
-- [Navigation](manual/04-navigation.md)
-- [The top bar](manual/05-the-top-bar.md)
-- [Themes](manual/06-themes.md)
-- [Hotkeys](manual/07-hotkeys.md)
-- [Unified Clipboard & History](manual/08-unified-clipboard-history.md)
-- [Reminders](manual/09-reminders.md)
-- [Notices](manual/10-notices.md)
-- [Text Extraction & Dictation](manual/11-text-extraction-dictation.md)
-- [Screenshots & Recording](manual/12-screenshots-recording.md)
-- [Toggles, idle & screensaver](manual/13-toggles-idle-screensaver.md)
-- [Omarchy CLI](manual/14-omarchy-cli.md)
+### Goals
+* Use basic dotfiles from Omarchy
+* Make Omarchy themes and plugins usable
+* User installation only, minimize changes to the operating system
+* Do not install any of the bloat by default
+* Minimize reliance on AUR packages, remove custom repositories completely
+* Make dotfiles usable on other Arch based distros like CachyOS
 
-**The Applications**
+### Changes
+* Services and AI menus removed (applications can still be installed from the AUR)
 
-- [Terminal](manual/15-terminal.md)
-- [Neovim](manual/16-neovim.md)
-- [AI](manual/17-ai.md)
-- [Development Tools](manual/18-development-tools.md)
-- [Shell Tools](manual/19-shell-tools.md)
-- [Shell Functions](manual/20-shell-functions.md)
-- [TUIs](manual/21-tuis.md)
-- [GUIs](manual/22-guis.md)
-- [Browsers](manual/23-browsers.md)
-- [Commercial apps/services](manual/24-commercial-apps-services.md)
-- [Web Apps](manual/25-web-apps.md)
-- [Gaming](manual/26-gaming.md)
-- [Filling out PDFs](manual/27-filling-out-pdfs.md)
-- [Windows VM](manual/28-windows-vm.md)
-- [Other Packages](manual/29-other-packages.md)
+## Setup
 
-**Configuration**
+### Prerequisites
+For now, the following Arch Linux installation is assumed:
+* Fresh installation using archinstall
+* btrfs file system, best effort partition layout
+* Btrfs snapshot type: Snapper
+* Swap on zram enabled, zstd compression
+* Plymouth enabled
+* User with sudo rights
+* Profile: Desktop/Hyprland
+* Greeter: sddm
+* Audio: pipewire
+* Firewall: ufw
+* Network configuration: Copy ISO
 
-- [Updates](manual/30-updates.md)
-- [Dotfiles](manual/31-dotfiles.md)
-- [Shell plugins](manual/32-shell-plugins.md)
-- [Monitors](manual/33-monitors.md)
-- [Keyboard, Mouse, Trackpad](manual/34-keyboard-mouse-trackpad.md)
-- [Networking](manual/35-networking.md)
-- [System sleep](manual/36-system-sleep.md)
-- [Hardware authentication](manual/37-hardware-authentication.md)
-- [Fonts](manual/38-fonts.md)
-- [Backgrounds](manual/39-backgrounds.md)
-- [Prompt](manual/40-prompt.md)
-- [Branding](manual/41-branding.md)
-- [Common tweaks](manual/42-common-tweaks.md)
-- [Making your own theme](manual/43-making-your-own-theme.md)
+Note that these are just the settings I tested with, which match the defaults used by Omarchy. The only one that should really matter is that the desktop environment is Hyprland (uwsm-managed). You should be able to configure all other settings to your liking, although some of the functions shipped with Omarchy might not work.
 
-**The Rest**
+### Manual Setup
+1) Install Arch Linux using archinstall. Use the above settings as a guideline, make sure to set the profile to Desktop/Hyprland.
+2) After reboot, press Ctrl-Alt-F3 and log in with the user you created in the previous step.
+3) Clone and install yay:
+```
+sudo pacman -Sy base-devel git
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+cd ..
+```
+4) Install the required packages:
+```
+sudo pacman -Sy --needed alacritty alsa-utils avahi bash-completion bat bluez bluez-tools bluez-utils bolt brightnessctl btop chromium clang cups cups-filters cups-pk-helper ddcutil dosfstools dotnet-runtime dua-cli evince exfatprogs expac eza fakeroot fastfetch fcitx5 fcitx5-gtk fcitx5-qt fd ffmpegthumbnailer fontconfig foot fzf git gnome-keyring gnome-themes-extra grim gpu-screen-recorder gum gvfs-mtp gvfs-nfs gvfs-smb hyprland hyprland-guiutils hyprpicker hyprsunset imagemagick imv inetutils inotify-tools inxi networkmanager jq kernel-modules-hook kitty lazygit less libsecret libvips libyaml llvm lua51 luarocks man-db mariadb-libs mpv mpv-mpris nautilus nautilus-python gnome-disk-utility noto-fonts noto-fonts-cjk noto-fonts-emoji nss-mdns nvim pacman-contrib pamixer pinta plocate plymouth postgresql-libs power-profiles-daemon python-gobject python-poetry-core qemu-user-static-binfmt qrencode qt6-imageformats qt6-multimedia qt6-multimedia-ffmpeg quickshell ripgrep ruby sddm slurp socat starship sushi system-config-printer tesseract tesseract-data-eng tldr tree-sitter-cli tmux ttf-jetbrains-mono-nerd udiskie ufw unzip usage uwsm vi whois wireless-regdb wireplumber wl-clipboard wtype woff2-font-awesome xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xournalpp yt-dlp zbar zoxide
+```
+At this point, the only package that is required from AUR (besides `yay`) is `xdg-terminal-exec`.
+```
+yay -Sy xdg-terminal-exec
+```
 
-- [Mac support](manual/44-mac-support.md)
-- [Troubleshooting](manual/45-troubleshooting.md)
-- [FAQ](manual/46-faq.md)
-- [System snapshots](manual/47-system-snapshots.md)
-- [Security](manual/48-security.md)
-- [Omarchy on...](manual/49-omarchy-on.md)
-- [Dual Boot Install](manual/50-dual-boot-install.md)
-- [Unattended Installs](manual/51-unattended-installs.md)
+
+5) Clone this repository into .anarchy:
+```
+cd
+git clone https://github.com/wansti/anarchy.git .anarchy
+```
+
+6) Copy the initial configuration files:
+```
+mkdir -p ~/.config/systemd ~/.local/share/applications ~/.local/state/omarchy/toggles
+cd .anarchy
+cp -r config/* ~/.config/
+cp default/bashrc ~/.bashrc
+cp -r default/systemd/user ~/.config/systemd/
+cp applications/foot.desktop applications/mpv.desktop ~/.local/share/applications/
+cp default/xdg-terminal-exec/hyprland-xdg-terminals.list ~/.config/
+touch ~/.local/state/omarchy/toggles/screensaver-off
+```
+
+7) Optional: Run the script that sets up the screen lock:
+```
+bin/omarchy-apply-lock
+```
+This will ask for root permissions in order to write the file `/etc/pam.d/omarchy-lock-password`.
+
+8) Reboot. Once the system is back, log into your Hyprland session. You should be greeted with the familiar interface.
+9) Optional: In order to install gaming-related packages (e.g. Steam, Battle.net), edit `/etc/pacman.conf` (as root) and uncomment the `[multilib]` section.
+
+
+### Automated Setup
+coming soon
+
+## Caveats
+* Do not use `omarchy update`, simply update your packages with pacman (and yay) as usual. `git pull` this repository to get the latest updates into `.anarchy`.
+* Many of the packages from the "Install" menu will fail to set up properly. You can find most of them in the AUR instead.
+* No screensaver.
+* [tbd]
 
 ## License
 
-Omarchy is released under the [MIT License](https://opensource.org/licenses/MIT).
+Anarchy/Omarchy is released under the [MIT License](https://opensource.org/licenses/MIT).
